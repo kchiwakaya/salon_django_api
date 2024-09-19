@@ -1,13 +1,13 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Style, Appointment, Image, Review, UserProfile
+from .models import Style, Appointment, Review, UserProfile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from .serializers import UserProfileSerializer, AppointmentSerializer, StyleSerializer, ReviewSerializer, ImageSerializer
+from .serializers import UserProfileSerializer, AppointmentSerializer, StyleSerializer, ReviewSerializer
 
 class AppointmentListAPI(APIView):
     def get(self, request):
@@ -185,46 +185,3 @@ class ReviewDetailAPI(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-class ImagesAPI(APIView):
-    def get(self, request):
-        images = Image.objects.all()
-        serializer = ImageSerializer(images, many=True)
-        return Response(serializer.data)
-    
-    def post(self, request):
-        serializer = ImageSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class ImageDetailAPI(APIView):
-    def get_object(self, pk):
-        try:
-            return Image.objects.get(pk=pk)
-        except Image.DoesNotExist:
-            return None
-
-    def get(self, request, pk):
-        image = self.get_object(pk)
-        if image is not None:
-            serializer = ImageSerializer(image)
-            return Response(serializer.data)
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
-    def put(self, request, pk):
-        image = self.get_object(pk)
-        if image is not None:
-            serializer = ImageSerializer(image, data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
-    def delete(self, request, pk):
-        image = self.get_object(pk)
-        if image is not None:
-            image.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response(status=status.HTTP_404_NOT_FOUND)

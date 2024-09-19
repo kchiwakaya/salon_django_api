@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import UserProfile,Style,Review,Image,Appointment
+from .models import UserProfile,Style,Review,Appointment
 
 class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,10 +16,7 @@ class StyleSerializer(serializers.ModelSerializer):
         model = Style
         fields = '__all__'
 
-class ImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Appointment
-        fields = '__all__'
+
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review

@@ -4,8 +4,7 @@ from .views import (
     AppointmentListAPI, AppointmentDetailAPI,
     UserProfilesAPI, UserProfileDetailAPI,
     StylesAPI, StyleDetailAPI,
-    ReviewsAPI, ReviewDetailAPI,
-    ImagesAPI, ImageDetailAPI
+    ReviewsAPI, ReviewDetailAPI
 )
 
 urlpatterns = [
@@ -18,6 +17,5 @@ urlpatterns = [
     path('styles/<int:pk>/', StyleDetailAPI.as_view(), name="StyleDetailAPI"),
     path('reviews/', ReviewsAPI.as_view(), name="ReviewsAPI"),
     path('reviews/<int:pk>/', ReviewDetailAPI.as_view(), name="ReviewDetailAPI"),
-    path('images/', ImagesAPI.as_view(), name="ImagesAPI"),
-    path('images/<int:pk>/', ImageDetailAPI.as_view(), name="ImageDetailAPI"),
+   
 ]
