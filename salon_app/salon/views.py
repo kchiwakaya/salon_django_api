@@ -185,3 +185,9 @@ class ReviewDetailAPI(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
 
+class StylesByStylistAPI(APIView):
+    def get(self, request, stylist_id):
+        styles = Style.objects.filter(stylist_id=stylist_id)
+        serializer = StyleSerializer(styles, many=True)
+        return Response(serializer.data)
+

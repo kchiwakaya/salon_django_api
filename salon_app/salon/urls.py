@@ -4,7 +4,8 @@ from .views import (
     AppointmentListAPI, AppointmentDetailAPI,
     UserProfilesAPI, UserProfileDetailAPI,
     StylesAPI, StyleDetailAPI,
-    ReviewsAPI, ReviewDetailAPI
+    ReviewsAPI, ReviewDetailAPI,
+    StylesByStylistAPI  # Import the new view
 )
 
 urlpatterns = [
@@ -17,5 +18,5 @@ urlpatterns = [
     path('styles/<int:pk>/', StyleDetailAPI.as_view(), name="StyleDetailAPI"),
     path('reviews/', ReviewsAPI.as_view(), name="ReviewsAPI"),
     path('reviews/<int:pk>/', ReviewDetailAPI.as_view(), name="ReviewDetailAPI"),
-   
+    path('styles/stylist/<int:stylist_id>/', StylesByStylistAPI.as_view(), name="StylesByStylistAPI"),  # New path for filtering styles
 ]
