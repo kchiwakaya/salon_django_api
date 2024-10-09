@@ -9,6 +9,7 @@ class UserProfile(AbstractUser):
        ('bb','Barber'),
        ('stl','Nail Stylist')
     )
+    name = models.CharField(max_length=100, blank=True)
     address = models.CharField(max_length = 255,blank=True)
     phone_number = models.CharField(max_length = 20,blank = True)
     salon_name = models.CharField(max_length = 50,blank = True)
